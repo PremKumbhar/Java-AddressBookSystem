@@ -71,6 +71,20 @@ public void editContacts() {
 	}
 }
 
-
-
+public void deleteContacts() {
+	System.out.println("Enter the first name you want to delete :");
+	String firstName = sc.next();
+	boolean isAvailable = false;
+	for(Contacts contacts : contactsArrayList) {
+		if(contacts.getFirstName().equals(firstName)) {
+			isAvailable = true;
+			contactsArrayList.remove(contacts);
+			System.out.println("Contact Deleted Successfully...!");
+			break;
+		}
+	}
+	if(isAvailable == false) {
+		System.out.println("Contact not available");
+	}
+}
 }

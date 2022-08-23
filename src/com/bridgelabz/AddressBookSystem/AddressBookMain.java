@@ -11,7 +11,7 @@ public class AddressBookMain {
 		
 		do {
 			System.out.println("***Welcome to Address Book Program***");
-			System.out.println("1. ADD CONTACT \n2. DISPLAY CONTACT \n3. EDIT CONTACT \n4. EXIT ");
+			System.out.println("1. ADD CONTACT \n2. DISPLAY CONTACT \n3. EDIT CONTACT \n4. DELETE CONTACT \n5. EXIT ");
 			System.out.println("Enter the Operation Number");
 			operationNo = sc.nextInt();
 			
@@ -25,6 +25,9 @@ public class AddressBookMain {
 				
 			case 3:
 				addressBook.editContacts();
+				break;
+			case 4:
+				addressBook.deleteContacts();
 				break;
 				
 			default:
