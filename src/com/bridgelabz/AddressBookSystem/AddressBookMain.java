@@ -131,6 +131,19 @@ public class AddressBookMain {
 	                        System.out.println(exception);
 	                    }
 	                    break;
+	                case 10:
+	                    Set<Map.Entry<String, AddressBook>> addressBook2 = addressBookHashMap.entrySet();
+	                    System.out.println("Enter city or state : ");
+	                    String location = sc.next();
+	                    if (addressBook2.isEmpty()){
+	                        System.out.println("No address books available!");
+	                    }
+	                    for (Map.Entry entry :  addressBook2){
+	                        System.out.println(entry.getKey());
+	                        AddressBook addBook = (AddressBook) entry.getValue();
+	                        addBook.searchByCityOrState(location);
+	                    }
+	                    break;
 	                default:
 	                    System.out.println("Invalid Input");
 	            }

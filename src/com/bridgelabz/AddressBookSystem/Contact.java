@@ -1,6 +1,8 @@
 package com.bridgelabz.AddressBookSystem;
 
-public class Contact 
+import java.io.Serializable;
+
+public class Contact implements Serializable 
 {
 private String firstName;
 private String lastName;
@@ -10,6 +12,24 @@ private String state;
 private String zipCode;
 private String mobileNo;
 private String email;
+
+public Contact(){};
+
+
+public Contact(String firstName, String lastName, String address, String city, String state, String zipCode,
+		String mobileNo, String email) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.address = address;
+	this.city = city;
+	this.state = state;
+	this.zipCode = zipCode;
+	this.mobileNo = mobileNo;
+	this.email = email;
+}
+
+
 /**
  * @return the firstName
  */
