@@ -1,109 +1,133 @@
 package com.bridgelabz.AddressBookSystem;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressBook {
-Scanner sc = new Scanner(System.in);
+	ArrayList<Contact> contacts = new ArrayList<>();
+	    private Scanner sc = new Scanner(System.in);
 
-ArrayList<Contacts> contactsArrayList = new ArrayList<Contacts>();
+	    public void addContact(){
+	    	System.out.println("Enter the First Name : ");
+	    	String firstName = sc.next();
+	    	System.out.println("Enter the Last Name : ");
+	    	String lastName = sc.next();
+	        System.out.println("Enter address : ");
+	        String address = sc.next();
+	        System.out.println("Enter city and state : ");
+	        String city = sc.next();
+	        String state = sc.next();
+	        System.out.println("Enter zip code : ");
+	        String zipCode = sc.next();
+	        System.out.println("Enter contact number : ");
+	        String mobileNo = sc.next();
+	        System.out.println("Enter email id : ");
+	        String email = sc.next();
+	    	
+	        if (isDuplicate(firstName, lastName))
+	            System.out.println(firstName+" "+ lastName+" already exists in contacts");
+	        else
+	        	 contacts.add(new Contact());
 
-public void addContact() {
-	Contacts contact = new Contacts();
-	System.out.println("HashCode of contact object : " +contact.hashCode());
-	System.out.println("Enter the First Name : ");
-	contact.setFirstName(sc.next());
-	System.out.println("Enter the Last Name : ");
-	contact.setLastName(sc.next());
-	System.out.println("Enter the Address : ");
-	contact.setAddress(sc.next());
-	System.out.println("Enter the City : ");
-	contact.setCity(sc.next());
-	System.out.println("Enter the State : ");
-	contact.setState(sc.next());
-	System.out.println("Enter the ZipCode : ");
-	contact.setZipCode(sc.next());
-	System.out.println("Enter the Mobile no : ");
-	contact.setMobileNo(sc.next());
-	System.out.println("Enter the Email Id : ");
-	contact.setEmail(sc.next());
-	contactsArrayList.add(contact);
-}
-		
-public void  displayContacts() {
-	for(int i = 0; i < contactsArrayList.size(); i++) {
-		Contacts contacts = contactsArrayList.get(i);
-		System.out.println(contacts.toString());
-	}
-	
-}
+	    }
 
-public void editContacts() {
-	// editing the existing contact using their First Name
-			System.out.println("Enter the First Name of Contact to Edit");
-			String firstName = sc.next();
-			boolean isAvailable = false ;
-			for(Contacts contact : contactsArrayList) {
-				if(contact.getFirstName().equals(firstName)) {
-					isAvailable = true ;
-					System.out.println("What you want to edit for the contact");
-					System.out.println("1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip Code\n7.Mobile Number\n8.Email id");
-					int choice = sc.nextInt();
-					switch(choice) {
-					case 1:
-						System.out.println("Enter the First Name :");
-						contact.setFirstName(sc.next());
-						break;
-					case 2:
-						System.out.println("Enter the Last Name :");
-						contact.setLastName(sc.next());
-						break;
-					case 3:
-						System.out.println("Enter the Address :");
-						contact.setAddress(sc.next());
-						break;
-					case 4:
-						System.out.println("Enter the City :");
-						contact.setCity(sc.next());
-						break;
-					case 5:
-						System.out.println("Enter the State :");
-						contact.setState(sc.next());
-						break;
-					case 6:
-						System.out.println("Enter the Zip code :");
-						contact.setZipCode(sc.next());
-						break;
-					case 7:
-						System.out.println("Enter the Mobile Number :");
-						contact.setMobileNo(sc.next());
-						break;
-					case 8:
-						System.out.println("Enter the Email id :");
-						contact.setEmail(sc.next());
-						break;
-					}
-					System.out.println("Updated Sucessfully ...");
-				}
-			}
-			if(isAvailable == false){
-				System.out.println("Contact is not Available \nTry again");
-			}
-}
-public void deleteContacts() {
-	System.out.println("Enter the first name you want to delete :");
-	String firstName = sc.next();
-	boolean isAvailable = false;
-	for(Contacts contacts : contactsArrayList) {
-		if(contacts.getFirstName().equals(firstName)) {
-			isAvailable = true;
-			contactsArrayList.remove(contacts);
-			System.out.println("Contact Deleted Successfully...!");
-			break;
-		}
-	}
-	if(isAvailable == false) {
-		System.out.println("Contact not available");
-	}
-}
+	    public void displayContact(){
+	    	for(int i = 0; i < contacts.size(); i++) {
+	    		Contact contact = contacts.get(i);
+	    		System.out.println(contacts.toString());
+	        }
+	    }
+
+	    public void editContact(){
+	        System.out.println("Enter person name : ");
+	        String name = sc.next();
+	        for(Contact contact : contacts){
+	            if(contact.getFirstName().equals(name) || contact.getLastName().equals(name)){
+	                System.out.println("What you want to edit : \n" +
+	                        "1.first name \t" +
+	                        "2.last name \t" +
+	                        "3.address \t" +
+	                        "4.city \t" +
+	                        "5.state \t" +
+	                        "6.zipCode \t" +
+	                        "7.mobile number \t" +
+	                        "8.email");
+	                int ch = sc.nextInt();
+	                switch (ch){
+	                    case 1:
+	                        System.out.println("Enter first name :");
+	                        contact.setFirstName(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 2:
+	                        System.out.println("Enter last name :");
+	                        contact.setLastName(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 3:
+	                        System.out.println("Enter address :");
+	                        contact.setAddress(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 4:
+	                        System.out.println("Enter city :");
+	                        contact.setCity(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 5:
+	                        System.out.println("Enter state :");
+	                        contact.setState(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 6:
+	                        System.out.println("Enter zip code :");
+	                        contact.setZipCode(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 7:
+	                        System.out.println("Enter mobile number :");
+	                        contact.setMobileNo(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    case 8:
+	                        System.out.println("Enter email :");
+	                        contact.setEmail(sc.next());
+	                        System.out.println("Contact updated!");
+	                        break;
+	                    default:
+	                        System.out.println("Invalid input.");
+	                }
+	                return;
+	            }
+	        }
+	        System.out.println(name + " not found!");
+	    }
+
+	    public void deleteContact(){
+	        System.out.println("Enter person name : ");
+	        String name = sc.next();
+	        for(Contact contact : contacts){
+	            if(contact.getFirstName().equals(name) || contact.getLastName().equals(name)){
+	                contacts.remove(contact);
+	                System.out.println(contact.getFirstName() +" removed!");
+	                return;
+	            }
+	        }
+	        System.out.println(name + " not found!");
+	    }
+	    public List<Contact> getContactList(){
+	        return contacts;
+	    }
+
+	    /*
+	    * This method is used to check the duplicate entry
+	    * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
+	    * if duplicate return true else return false
+	    * */
+	    public boolean isDuplicate(String firstName, String lastName){
+	        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
+	        return result;
+	    }
+
 }
