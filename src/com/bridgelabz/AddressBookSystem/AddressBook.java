@@ -25,10 +25,7 @@ public class AddressBook {
 	        System.out.println("Enter email id : ");
 	        String email = sc.next();
 	    	
-	        if (isDuplicate(firstName, lastName))
-	            System.out.println(firstName+" "+ lastName+" already exists in contacts");
-	        else
-	        	 contacts.add(new Contact());
+	        contacts.add(new Contact(firstName,lastName,address,city,state,zipCode,mobileNo,email));
 
 	    }
 
@@ -118,23 +115,6 @@ public class AddressBook {
 	    }
 	    public List<Contact> getContactList(){
 	        return contacts;
-	    }
-
-	    /*
-	    * This method is used to check the duplicate entry
-	    * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
-	    * if duplicate return true else return false
-	    * */
-	    public boolean isDuplicate(String firstName, String lastName){
-	        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
-	        return result;
-	    }
-	    public void searchByCityOrState(String location){
-	        contacts.stream().forEach(contact -> {
-	            if (contact.getCity().equals(location) || contact.getState().equals(location)){
-	                System.out.println(contact);
-	            }
-	        });
 	    }
 
 }
