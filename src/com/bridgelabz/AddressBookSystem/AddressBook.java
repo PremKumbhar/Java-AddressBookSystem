@@ -1,13 +1,17 @@
 package com.bridgelabz.AddressBookSystem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
-	ArrayList<Contact> contacts = new ArrayList<>();
+	    private ArrayList<Contact> contacts = new ArrayList<>();
+	    private HashMap<String, List<Contact>> cityContactList = new HashMap<>();
+	    private HashMap<String, List<Contact>> stateContactList = new HashMap<>();
 	    private Scanner sc = new Scanner(System.in);
-
+	    
 	    public void addContact(){
 	    	System.out.println("Enter the First Name : ");
 	    	String firstName = sc.next();
@@ -24,9 +28,30 @@ public class AddressBook {
 	        String mobileNo = sc.next();
 	        System.out.println("Enter email id : ");
 	        String email = sc.next();
-	    	
-	        contacts.add(new Contact(firstName,lastName,address,city,state,zipCode,mobileNo,email));
+	        
+	        if (isDuplicate(firstName, lastName))
+	            System.out.println(firstName+" "+ lastName+" already exists in contacts");
+	        else {
+	            Contact contact = new Contact(firstName, lastName, address, city, state, zipCode, mobileNo, email);
+	            contacts.add(contact);
+	            if (cityContactList.containsKey(city)){
+	                List<Contact> tempList = cityContactList.get(city);
+	                tempList.add(contact);
+	            }else {
+	                List<Contact> tempList = new ArrayList<>();
+	                tempList.add(contact);
+	                cityContactList.put(city,tempList);
+	            }
+				if (stateContactList.containsKey(state)){
+	                List<Contact> tempList = stateContactList.get(state);
+	                tempList.add(contact);
+	            }else {
+	                List<Contact> tempList = new ArrayList<>();
+	                tempList.add(contact);
+	                stateContactList.put(state,tempList);
+	            }
 
+	        }
 	    }
 
 	    public void displayContact(){
@@ -116,5 +141,37 @@ public class AddressBook {
 	    public List<Contact> getContactList(){
 	        return contacts;
 	    }
+	    /*
+		    * This method is used to check the duplicate entry
+		    * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
+		    * if duplicate return true else return false
+		    * */
+		    public boolean isDuplicate(String firstName, String lastName){
+		        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
+		        return result;
+		    }
+		    public void searchByCityOrState(String location){
+		        contacts.stream().forEach(contact -> {
+		            if (contact.getCity().equals(location) || contact.getState().equals(location)){
+		                System.out.println(contact);
+		            }
+		        });
+		    }
+
+		
+// method to view person by city
+public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
+    for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+        //list = entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+        entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
+    }
 
 }
+public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
+    for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+        entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
+    }
+}
+}
+
+

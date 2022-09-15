@@ -1,9 +1,14 @@
 package com.bridgelabz.AddressBookSystem;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,10 +137,40 @@ public class AddressBookMain {
 	                        System.out.println(exception);
 	                    }
 	                    break;
-	                default:
-	                    System.out.println("Invalid Input");
+	                
+	                case 10:
+	                    Set<Map.Entry<String, AddressBook>> addressBook2 = addressBookHashMap.entrySet();
+	                    System.out.println("Enter city or state : ");
+	                    String location = sc.next();
+	                    if (addressBook2.isEmpty()){
+	                        System.out.println("No address books available!");
+	                    }
+	                    for (Map.Entry entry :  addressBook2){
+	                        System.out.println(entry.getKey());
+	                        AddressBook addBook = (AddressBook) entry.getValue();
+	                        addBook.searchByCityOrState(location);
+	                    }
+	                    break;
+	                case 11:
+	                    System.out.println("1. View by city 2.View by state");
+	                    int in = sc.nextInt();
+	                    switch (in){
+	                        case 1:
+	                            System.out.println("Enter city :");
+	                            String city = sc.next();
+	                            AddressBook.viewContactByCity(addressBookHashMap,city);
+	                            break;
+	                        case 2:
+	                            System.out.println("Enter state :");
+	                            String state = sc.next();
+	                            AddressBook.viewContactByState(addressBookHashMap, state);
+	                            break;
+	                    }
+	                    break;
+	                    default:
+	                        System.out.println("Invalid Input");
+	                }
 	            }
-	        }
 
+	        }
 	    }
-}
