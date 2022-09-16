@@ -31,7 +31,8 @@ public class AddressBookMain {
 	                    "\n8.Write addressbook to file" +
 	                    "\n9.Read addressbook from file" +
 	                    "\n10.Search by city or state " +
-	                    "\n11.View Person by city or state");
+	                    "\n11.View Person by city or state" +
+	            		"\12.Get person count by city ");
 	            		
 	            		
 	            int ch = sc.nextInt();
@@ -168,6 +169,10 @@ public class AddressBookMain {
 	                            AddressBook.viewContactByState(addressBookHashMap, state);
 	                            break;
 	                    }
+	                    break;
+	                case 12:
+	                    System.out.println("Enter city name");
+	                    AddressBook.getCountByCity(addressBookHashMap,sc.next());
 	                    break;
 	                
 	                    default:
