@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
-	    private ArrayList<Contact> contacts = new ArrayList<>();
+	 	private ArrayList<Contact> contacts = new ArrayList<>();
 	    private HashMap<String, List<Contact>> cityContactList = new HashMap<>();
 	    private HashMap<String, List<Contact>> stateContactList = new HashMap<>();
 	    private Scanner sc = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class AddressBook {
 	                tempList.add(contact);
 	                cityContactList.put(city,tempList);
 	            }
-				if (stateContactList.containsKey(state)){
+	            if (stateContactList.containsKey(state)){
 	                List<Contact> tempList = stateContactList.get(state);
 	                tempList.add(contact);
 	            }else {
@@ -53,7 +53,6 @@ public class AddressBook {
 
 	        }
 	    }
-
 	    public void displayContact(){
 	    	for(int i = 0; i < contacts.size(); i++) {
 	    		Contact contact = contacts.get(i);
@@ -142,36 +141,33 @@ public class AddressBook {
 	        return contacts;
 	    }
 	    /*
-		    * This method is used to check the duplicate entry
-		    * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
-		    * if duplicate return true else return false
-		    * */
-		    public boolean isDuplicate(String firstName, String lastName){
-		        boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
-		        return result;
-		    }
-		    public void searchByCityOrState(String location){
-		        contacts.stream().forEach(contact -> {
-		            if (contact.getCity().equals(location) || contact.getState().equals(location)){
-		                System.out.println(contact);
-		            }
-		        });
-		    }
+	     * This method is used to check the duplicate entry
+	     * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
+	     * if duplicate return true else return false
+	     * */
+	     public boolean isDuplicate(String firstName, String lastName){
+	         boolean result = contacts.stream().filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)).count() > 0;
+	         return result;
+	     }
+	     public void searchByCityOrState(String location){
+	         contacts.stream().forEach(contact -> {
+	             if (contact.getCity().equals(location) || contact.getState().equals(location)){
+	                 System.out.println(contact);
+	             }
+	         });
+	     }
 
-		
-// method to view person by city
-public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
-    for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
-        //list = entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
-        entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
-    }
+	     // method to view person by city
+	     public static void viewContactByCity(HashMap<String, AddressBook> addressBookHashMap,String city) {
+	         for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+	             //list = entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+	             entries.getValue().getContactList().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).forEach(p -> System.out.println(p));
+	         }
 
-}
-public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
-    for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
-        entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
-    }
-}
-}
-
-
+	     }
+	     public static void viewContactByState(HashMap<String, AddressBook> addressBookHashMap,String state) {
+	         for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+	             entries.getValue().getContactList().stream().filter(p -> p.getState().equalsIgnoreCase(state)).forEach(p -> System.out.println(p));
+	         }
+	     }
+	 }
